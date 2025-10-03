@@ -27,33 +27,34 @@ export default function CurrentWeather() {
   const weatherDescription = current.weather[0]?.description || '';
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 sm:mb-6">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
             {selectedLocation?.name || location.name}
           </h1>
-          <p className="text-gray-700 font-medium mt-1">{formatDate(current.dt)}</p>
+          <p className="text-sm sm:text-base text-gray-700 font-medium mt-1">{formatDate(current.dt)}</p>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-8">
-        <div className="flex items-center gap-6">
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mb-4 sm:mb-8">
+        <div className="flex items-center gap-3 sm:gap-6">
           {weatherIcon && (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={`https://openweathermap.org/img/wn/${weatherIcon}@4x.png`}
               alt={weatherDescription}
-              className="w-32 h-32"
+              className="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0"
             />
           )}
           <div>
-            <div className="text-6xl font-bold text-gray-900">
+            <div className="text-4xl sm:text-6xl font-bold text-gray-900">
               {getTemperature(current.temp, units)}
             </div>
-            <p className="text-xl text-gray-800 font-semibold capitalize mt-2">
+            <p className="text-base sm:text-xl text-gray-800 font-semibold capitalize mt-1 sm:mt-2">
               {weatherDescription}
             </p>
-            <p className="text-gray-700 font-medium mt-1">
+            <p className="text-sm sm:text-base text-gray-700 font-medium mt-1">
               Feels like {getTemperature(current.feels_like, units)}
             </p>
           </div>
@@ -93,12 +94,12 @@ export default function CurrentWeather() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 pt-6 border-t border-gray-200">
-        <div className="flex items-center gap-3">
-          <Sunrise className="w-8 h-8 text-orange-500" />
+      <div className="grid grid-cols-2 gap-3 sm:gap-6 pt-4 sm:pt-6 border-t border-gray-200">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Sunrise className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500 flex-shrink-0" />
           <div>
-            <p className="text-sm text-gray-500">Sunrise</p>
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-xs sm:text-sm text-gray-500">Sunrise</p>
+            <p className="text-sm sm:text-lg font-semibold text-gray-800">
               {new Date(current.sunrise * 1000).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
@@ -106,11 +107,11 @@ export default function CurrentWeather() {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <Sunset className="w-8 h-8 text-purple-500" />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Sunset className="w-6 h-6 sm:w-8 sm:h-8 text-purple-500 flex-shrink-0" />
           <div>
-            <p className="text-sm text-gray-500">Sunset</p>
-            <p className="text-lg font-semibold text-gray-800">
+            <p className="text-xs sm:text-sm text-gray-500">Sunset</p>
+            <p className="text-sm sm:text-lg font-semibold text-gray-800">
               {new Date(current.sunset * 1000).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',

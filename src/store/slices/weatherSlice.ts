@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { WeatherData, AirQualityData, Location } from '@/types/weather';
-import axios from 'axios';
 
 interface WeatherState {
   currentWeather: WeatherData | null;
@@ -21,20 +20,22 @@ const initialState: WeatherState = {
 export const fetchWeatherData = createAsyncThunk(
   'weather/fetchWeatherData',
   async ({ lat, lon }: { lat: number; lon: number }) => {
-    const response = await axios.get('/api/weather', {
-      params: { lat, lon },
-    });
-    return response.data;
+    const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch weather data');
+    }
+    return response.json();
   }
 );
 
 export const fetchAirQuality = createAsyncThunk(
   'weather/fetchAirQuality',
   async ({ lat, lon }: { lat: number; lon: number }) => {
-    const response = await axios.get('/api/air-quality', {
-      params: { lat, lon },
-    });
-    return response.data;
+    const response = await fetch(`/api/air-quality?lat=${lat}&lon=${lon}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch air quality data');
+    }
+    return response.json();
   }
 );
 

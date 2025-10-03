@@ -15,10 +15,10 @@ export default function AirQuality() {
   const { components } = airQuality;
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Wind className="w-6 h-6 text-blue-600" />
-        <h2 className="text-2xl font-bold text-gray-900">Air Quality Index</h2>
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
+      <div className="flex items-center gap-2 mb-3 sm:mb-4">
+        <Wind className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Air Quality Index</h2>
       </div>
 
       <div className="mb-6">

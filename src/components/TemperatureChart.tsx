@@ -109,9 +109,9 @@ export default function TemperatureChart() {
   } as const;
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">Temperature Trend</h2>
-      <div className="h-[300px]">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 overflow-hidden">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">Temperature Trend</h2>
+      <div className="h-[200px] sm:h-[250px] md:h-[300px] w-full">
         <Line data={data} options={options} />
       </div>
     </div>

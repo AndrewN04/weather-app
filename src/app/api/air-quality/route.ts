@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
 
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
@@ -23,18 +22,19 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const response = await axios.get(
-      'https://api.openweathermap.org/data/2.5/air_pollution',
-      {
-        params: {
-          lat,
-          lon,
-          appid: API_KEY,
-        },
-      }
-    );
+    const url = new URL('https://api.openweathermap.org/data/2.5/air_pollution');
+    url.searchParams.append('lat', lat);
+    url.searchParams.append('lon', lon);
+    url.searchParams.append('appid', API_KEY);
 
-    const airQualityData = response.data.list[0];
+    const response = await fetch(url.toString());
+    
+    if (!response.ok) {
+      throw new Error(`API responded with status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const airQualityData = data.list[0];
     
     return NextResponse.json({
       aqi: airQualityData.main.aqi,

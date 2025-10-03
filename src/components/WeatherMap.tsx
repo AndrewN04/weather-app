@@ -67,7 +67,7 @@ export default function WeatherMap() {
         .setLngLat([lon, lat])
         .addTo(map.current);
     }
-  }, [selectedLocation, currentWeather, MAPBOX_TOKEN]);
+  }, [selectedLocation, currentWeather]);
 
   if (!MAPBOX_TOKEN) {
     return (
@@ -83,9 +83,9 @@ export default function WeatherMap() {
   }
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Weather Radar</h2>
-      <div ref={mapContainer} className="w-full h-[400px] rounded-lg overflow-hidden" />
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">Weather Radar</h2>
+      <div ref={mapContainer} className="w-full h-[250px] sm:h-[400px] rounded-lg overflow-hidden" />
       <div className="mt-4 flex items-center gap-4 text-sm text-gray-600">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 bg-blue-400 opacity-60 rounded"></div>

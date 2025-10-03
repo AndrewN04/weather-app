@@ -16,20 +16,22 @@ export default function HourlyForecast() {
   const { hourly } = currentWeather;
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">24-Hour Forecast</h2>
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 overflow-hidden">
+      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">24-Hour Forecast</h2>
       
-      <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-        {hourly.slice(0, 24).map((hour, index) => (
+      <div className="-mx-4 sm:-mx-6 px-4 sm:px-6">
+        <div className="flex overflow-x-auto gap-2 sm:gap-4 pb-3 sm:pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          {hourly.slice(0, 24).map((hour, index) => (
           <div
             key={index}
-            className="flex flex-col items-center min-w-[80px] p-3 rounded-lg bg-gradient-to-b from-blue-100 to-white border border-blue-200"
+            className="flex flex-col items-center min-w-[70px] sm:min-w-[80px] p-2 sm:p-3 rounded-lg bg-gradient-to-b from-blue-100 to-white border border-blue-200"
           >
             <p className="text-sm font-semibold text-gray-800 mb-2">
               {index === 0 ? 'Now' : formatHour(hour.dt)}
             </p>
             
             {hour.weather[0]?.icon && (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
                 alt={hour.weather[0]?.description}
@@ -52,6 +54,7 @@ export default function HourlyForecast() {
             </div>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

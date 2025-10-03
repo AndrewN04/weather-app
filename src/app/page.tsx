@@ -28,7 +28,7 @@ export default function Home() {
           dispatch(fetchWeatherData({ lat: latitude, lon: longitude }));
           dispatch(fetchAirQuality({ lat: latitude, lon: longitude }));
         },
-        (error) => {
+        () => {
           // Geolocation denied or failed - use default location
           console.warn('Geolocation denied or unavailable. Using default location (New York).');
           dispatch(fetchWeatherData({ lat: 40.7128, lon: -74.0060 }));
@@ -59,8 +59,8 @@ export default function Home() {
     <div className={`min-h-screen bg-gradient-to-br ${backgroundGradient}`}>
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
+        <div className="mb-4 sm:mb-8">
           <SearchBar />
         </div>
 
@@ -72,19 +72,19 @@ export default function Home() {
             </div>
           </div>
         ) : currentWeather ? (
-          <div className="space-y-6">
+          <div className="space-y-3 sm:space-y-6">
             <WeatherAlerts />
             
             <CurrentWeather />
             
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
               <HourlyForecast />
               <TemperatureChart />
             </div>
 
             <DailyForecast />
             
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
               <AirQuality />
               <WeatherMap />
             </div>
@@ -98,9 +98,9 @@ export default function Home() {
         )}
       </main>
 
-      <footer className="bg-black/20 backdrop-blur-sm text-white py-6 mt-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-sm">
+      <footer className="bg-black/20 backdrop-blur-sm text-white py-4 sm:py-6 mt-6 sm:mt-12">
+        <div className="container mx-auto px-3 sm:px-4 text-center">
+          <p className="text-xs sm:text-sm">
             Weather data provided by{' '}
             <a
               href="https://openweathermap.org/"
