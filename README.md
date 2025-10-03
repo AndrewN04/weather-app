@@ -254,11 +254,3 @@ If you encounter any issues or have questions:
 2. Check the browser console for errors
 3. Ensure you're using Node.js 18+
 4. Try clearing the build cache: `rm -rf .next` and rebuild
-
----
-
-**Built with ❤️ using Next.js 15, TypeScript, and modern web technologies.**
-
-**Repository**: https://github.com/AndrewN04/weather-app
-
-**Version**: 2.0.0 (Leaflet Edition)
