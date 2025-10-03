@@ -14,7 +14,13 @@ const nextConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   experimental: {
-    optimizePackageImports: ['lucide-react', 'chart.js', 'react-chartjs-2'],
+    optimizePackageImports: [
+      'lucide-react',
+      'chart.js',
+      'react-chartjs-2',
+      'leaflet',
+      'react-leaflet',
+    ],
   },
 };
 
