@@ -120,6 +120,4 @@ export type Units = 'metric' | 'imperial';
 
 export interface UserPreferences {
   units: Units;
-  theme: 'light' | 'dark' | 'auto';
-  favoriteLocations: Location[];
 }

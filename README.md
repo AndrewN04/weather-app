@@ -1,134 +1,244 @@
-# Weather Dashboard 🌤️This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Weather Dashboard 🌤️
 
+A modern, responsive weather dashboard built with Next.js 15, TypeScript, Redux Toolkit, and Tailwind CSS. Get real-time weather data, interactive charts, weather maps, air quality monitoring, and severe weather alerts.
 
+![Weather Dashboard](https://img.shields.io/badge/Next.js-15.5.4-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8?style=for-the-badge&logo=tailwind-css)
 
-A comprehensive, modern weather dashboard built with Next.js 14, TypeScript, Redux Toolkit, and Tailwind CSS. Features real-time weather data, interactive charts, weather maps, air quality monitoring, and severe weather alerts.## Getting Started
+## 🌟 Features
 
+### Core Weather Features
+- ✅ **Current Weather Conditions** - Temperature, feels like, humidity, pressure, wind speed & direction, visibility, UV index
+- ✅ **Location Search** - Search by city name or ZIP code with autocomplete suggestions
+- ✅ **Geolocation Support** - Automatically detect and use device location
+- ✅ **7-Day Forecast** - Daily high/low temperatures, precipitation chances, sunrise/sunset times
+- ✅ **Hourly Forecast** - Temperature, rain %, wind, and conditions for the next 24 hours
+- ✅ **Dynamic Weather Icons & Backgrounds** - Visual themes that adapt to current weather conditions
+- ✅ **Units Toggle** - Switch between Celsius/Fahrenheit and metric/imperial units
+- ✅ **Fully Responsive Design** - Optimized for desktop, tablet, and mobile devices
 
+### Advanced Features
+- ✅ **Interactive Temperature Charts** - Visualize temperature and "feels like" trends over 24 hours using Chart.js
+- ✅ **Weather Radar Map** - Live precipitation overlay using Mapbox GL JS
+- ✅ **Air Quality Index (AQI)** - Real-time air quality with health recommendations and pollutant breakdown
+- ✅ **Severe Weather Alerts** - Highlighted warnings for storms, heat waves, and other severe conditions
+- ✅ **Sunrise & Sunset Times** - With daily tracking across the 7-day forecast
+- ✅ **Wind Compass** - Visual wind direction indicator
 
-## 🌟 FeaturesFirst, run the development server:
+## 🛠️ Tech Stack
 
+### Frontend
+- **Next.js 15.5.4** - React framework with App Router and Turbopack
+- **React 19.1.0** - UI library
+- **TypeScript 5.x** - Type safety
+- **Tailwind CSS 4.x** - Utility-first styling
+- **Redux Toolkit 2.9.0** - State management
+- **Chart.js 4.5.0** - Data visualization
+- **Mapbox GL JS 3.15.0** - Interactive maps
+- **Lucide React 0.544.0** - Icon library
+- **date-fns 4.1.0** - Date formatting
 
-
-### Core Features```bash
-
-- **Current Weather Conditions** - Temperature, feels like, humidity, pressure, wind speed & direction, visibility, UV indexnpm run dev
-
-- **Location Search** - Search by city name or ZIP code with autocomplete suggestions# or
-
-- **Geolocation Support** - Automatically detect and use device locationyarn dev
-
-- **7-Day Forecast** - Daily high/low temperatures, precipitation chances, sunrise/sunset times# or
-
-- **Hourly Forecast** - Temperature, rain %, wind, and conditions for the next 24 hourspnpm dev
-
-- **Dynamic Weather Icons & Backgrounds** - Visual themes that adapt to current weather conditions# or
-
-- **Units Toggle** - Switch between Celsius/Fahrenheit and metric/imperial unitsbun dev
-
-- **Fully Responsive Design** - Optimized for desktop, tablet, and mobile devices```
-
-
-
-### Advanced FeaturesOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-- **Interactive Temperature Charts** - Visualize temperature and "feels like" trends over 24 hours using Chart.js
-
-- **Weather Radar Map** - Live precipitation overlay using Mapbox GL JSYou can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-- **Air Quality Index (AQI)** - Real-time air quality with health recommendations
-
-- **Severe Weather Alerts** - Highlighted warnings for storms, heat waves, and other severe conditionsThis project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-- **Sunrise & Sunset Times** - With daily tracking across the 7-day forecast
-
-- **Weather Descriptions** - Natural language summaries of current conditions## Learn More
-
-
-
-## 🛠️ Tech StackTo learn more about Next.js, take a look at the following resources:
-
-
-
-### Frontend- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-
-- Next.js 14, TypeScript, Tailwind CSS, Redux Toolkit, Chart.js, Mapbox GL JS, Lucide React- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-
-
-### BackendYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-- Next.js API Routes, Prisma, PostgreSQL, OpenWeatherMap API
-
-## Deploy on Vercel
+### Backend
+- **Next.js API Routes** - Serverless endpoints
+- **OpenWeatherMap API** - Weather data provider
+- **Mapbox API** - Maps and geocoding
+- **Native Fetch API** - HTTP client
 
 ## 🚀 Getting Started
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prerequisites
+- Node.js 18+ installed
+- npm, yarn, or pnpm package manager
 
-### 1. Install Dependencies
+### 1. Clone the Repository
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+git clone <your-repo-url>
+cd weather-dashboard
+```
 
-\`\`\`bash
+### 2. Install Dependencies
+
+```bash
 npm install
-\`\`\`
+# or
+yarn install
+# or
+pnpm install
+```
 
-### 2. Set Up Environment Variables
+### 3. Set Up Environment Variables
 
 Create a `.env` file in the root directory:
 
-\`\`\`env
-DATABASE_URL="postgresql://username:password@localhost:5432/weather_dashboard?schema=public"
+```env
 NEXT_PUBLIC_OPENWEATHER_API_KEY="your_openweathermap_api_key_here"
 NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN="your_mapbox_access_token_here"
-\`\`\`
+```
 
 **Get API Keys:**
-- OpenWeatherMap: https://openweathermap.org/api (Free tier: 1,000 calls/day)
-- Mapbox: https://www.mapbox.com/ (Free tier available)
+- **OpenWeatherMap**: https://openweathermap.org/api
+  - Free tier: 1,000 calls/day
+  - Sign up and get your API key
+- **Mapbox**: https://www.mapbox.com/
+  - Free tier: 50,000 map loads/month
+  - Create account and get access token
 
-### 3. Set Up Database
-
-\`\`\`bash
-npx prisma generate
-npx prisma migrate dev --name init
-\`\`\`
+See `API-KEYS-GUIDE.md` for detailed instructions.
 
 ### 4. Run Development Server
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-Open [http://localhost:3000](http://localhost:3000)
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### 5. Build for Production
+
+```bash
+npm run build
+npm run start
+```
 
 ## 📁 Project Structure
 
-\`\`\`
-src/
-├── app/
-│   ├── api/          # API routes (weather, air-quality, geocode)
-│   ├── page.tsx      # Main dashboard
-│   └── layout.tsx    # Root layout
-├── components/       # React components
-├── store/           # Redux store & slices
-├── types/           # TypeScript interfaces
-├── utils/           # Utility functions
-└── lib/             # Prisma client
-\`\`\`
+```
+weather-dashboard/
+├── src/
+│   ├── app/
+│   │   ├── api/              # API routes
+│   │   │   ├── weather/      # Weather data endpoint
+│   │   │   ├── air-quality/  # Air quality endpoint
+│   │   │   └── geocode/      # Location search endpoint
+│   │   ├── page.tsx          # Main dashboard page
+│   │   ├── layout.tsx        # Root layout
+│   │   └── globals.css       # Global styles
+│   ├── components/           # React components (10 total)
+│   │   ├── Header.tsx
+│   │   ├── SearchBar.tsx
+│   │   ├── CurrentWeather.tsx
+│   │   ├── HourlyForecast.tsx
+│   │   ├── DailyForecast.tsx
+│   │   ├── AirQuality.tsx
+│   │   ├── WeatherAlerts.tsx
+│   │   ├── WeatherMap.tsx
+│   │   ├── TemperatureChart.tsx
+│   │   └── ReduxProvider.tsx
+│   ├── store/                # Redux store
+│   │   ├── index.ts
+│   │   ├── hooks.ts
+│   │   └── slices/
+│   │       ├── weatherSlice.ts
+│   │       └── preferencesSlice.ts
+│   ├── types/                # TypeScript interfaces
+│   │   └── weather.ts
+│   └── utils/                # Utility functions
+│       ├── weather.ts
+│       └── date.ts
+├── .env                      # Environment variables (create this)
+├── .env.example              # Environment template
+├── package.json              # Dependencies
+├── tailwind.config.ts        # Tailwind configuration
+├── tsconfig.json             # TypeScript configuration
+└── README.md                 # This file
+```
 
-## 🎨 Key Features
+## 🎨 Key Features Explained
 
-- **Dynamic Backgrounds** - Changes based on weather conditions (clear, rainy, snowy, etc.)
-- **Temperature Charts** - Interactive 24-hour temperature trends
-- **Weather Map** - Live precipitation radar with Mapbox
-- **Air Quality** - Color-coded AQI with pollutant details (PM2.5, PM10, O₃, NO₂)
+### Dynamic Backgrounds
+The dashboard background changes based on current weather conditions:
+- ☀️ Clear sky - Blue gradient
+- ☁️ Cloudy - Gray gradient
+- 🌧️ Rainy - Dark blue with rain effect
+- ⛈️ Stormy - Dark dramatic gradient
+- 🌨️ Snowy - Light gray/white gradient
+- 🌫️ Foggy/Misty - Muted tones
+
+### Temperature Charts
+Interactive 24-hour temperature visualization:
+- Line chart showing temperature trends
+- "Feels like" comparison
+- Hover tooltips with exact values
+- Responsive sizing for all devices
+
+### Weather Map
+Live weather radar with:
+- Mapbox GL JS integration
+- Precipitation overlay
+- Interactive controls (zoom, pan)
+- Current location marker
+- Dark theme styling
+
+### Air Quality
+Comprehensive air quality monitoring:
+- AQI scale (1-5) with color coding
+- Health recommendations
+- Individual pollutant levels:
+  - PM2.5 (fine particulate matter)
+  - PM10 (coarse particulate matter)
+  - O₃ (ozone)
+  - NO₂ (nitrogen dioxide)
+  - CO (carbon monoxide)
+  - SO₂ (sulfur dioxide)
+  - NH₃ (ammonia)
+
+## 📱 Responsive Design
+
+The app is fully optimized for:
+- 📱 **Mobile** (320px+) - Touch-friendly, compact layout
+- 📱 **Tablet** (768px+) - Balanced grid layout
+- 💻 **Desktop** (1024px+) - Full feature display
+
+## 🌐 Browser Support
+
+- ✅ Chrome/Edge 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Mobile Chrome (Android)
+- ✅ Mobile Safari (iOS)
+
+## 📚 Documentation
+
+- **README.md** - This file (quick start guide)
+- **SETUP.md** - Detailed setup instructions
+- **QUICKSTART.md** - 5-minute quick start
+- **FEATURES.md** - Complete feature list
+- **API-KEYS-GUIDE.md** - How to get API keys
+- **CHANGELOG.md** - Version history and changes
+
+## 🤝 Contributing
+
+This is a personal project, but suggestions and feedback are welcome!
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🙏 Acknowledgments
+
+- Weather data provided by [OpenWeatherMap](https://openweathermap.org/)
+- Maps powered by [Mapbox](https://www.mapbox.com/)
+- Icons from [Lucide](https://lucide.dev/)
+- Built with [Next.js](https://nextjs.org/)
 
 ## 📞 Support
 
-Weather data provided by [OpenWeatherMap](https://openweathermap.org/) | Maps by [Mapbox](https://www.mapbox.com/)
+If you encounter any issues or have questions:
+1. Check the documentation files (SETUP.md, QUICKSTART.md)
+2. Verify your API keys are correct
+3. Check the browser console for errors
+4. Ensure you're using Node.js 18+
 
 ---
 
 **Built with ❤️ using Next.js, TypeScript, and modern web technologies.**
+
+**Live Demo**: [Add your deployment URL here]
+
+**Version**: 1.0.0 (Simplified Edition)
