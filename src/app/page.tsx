@@ -13,6 +13,7 @@ import AirQuality from '@/components/AirQuality';
 import WeatherAlerts from '@/components/WeatherAlerts';
 import WeatherMap from '@/components/WeatherMap';
 import TemperatureChart from '@/components/TemperatureChart';
+import AdditionalDetails from '@/components/AdditionalDetails';
 import { Loader2 } from 'lucide-react';
 
 export default function Home() {
@@ -76,6 +77,11 @@ export default function Home() {
             <WeatherAlerts />
             
             <CurrentWeather />
+            
+            <AdditionalDetails 
+              current={currentWeather.current}
+              moonPhase={currentWeather.daily[0]?.moon_phase}
+            />
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
               <HourlyForecast />

@@ -13,12 +13,19 @@ export interface WeatherData {
     pressure: number;
     wind_speed: number;
     wind_deg: number;
+    wind_gust?: number;
     visibility: number;
     uvi: number;
     clouds: number;
     dt: number;
     sunrise: number;
     sunset: number;
+    rain_1h?: number;
+    rain_3h?: number;
+    snow_1h?: number;
+    snow_3h?: number;
+    sea_level?: number;
+    grnd_level?: number;
     weather: {
       id: number;
       main: string;
@@ -39,7 +46,11 @@ export interface HourlyWeather {
   humidity: number;
   wind_speed: number;
   wind_deg: number;
+  wind_gust?: number;
   pop: number;
+  rain?: number;
+  snow?: number;
+  clouds?: number;
   weather: {
     id: number;
     main: string;
@@ -54,6 +65,7 @@ export interface DailyWeather {
   sunset: number;
   moonrise: number;
   moonset: number;
+  moon_phase?: number;
   temp: {
     day: number;
     min: number;
@@ -72,6 +84,7 @@ export interface DailyWeather {
   humidity: number;
   wind_speed: number;
   wind_deg: number;
+  wind_gust?: number;
   pop: number;
   rain?: number;
   snow?: number;

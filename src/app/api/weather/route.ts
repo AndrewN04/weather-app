@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { calculateMoonPhase } from '@/utils/weather';
 
 const API_KEY = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
@@ -62,9 +63,23 @@ export async function GET(request: NextRequest) {
     // Process hourly data from 3-hour forecast
     interface ForecastItem {
       dt: number;
-      main: { temp: number; feels_like: number; humidity: number; pressure: number };
-      wind: { speed: number; deg: number };
+      main: { 
+        temp: number; 
+        feels_like: number; 
+        humidity: number; 
+        pressure: number;
+        sea_level?: number;
+        grnd_level?: number;
+      };
+      wind: { 
+        speed: number; 
+        deg: number;
+        gust?: number;
+      };
       pop?: number;
+      rain?: { '1h'?: number; '3h'?: number };
+      snow?: { '1h'?: number; '3h'?: number };
+      clouds?: { all: number };
       weather: Array<{ id: number; main: string; description: string; icon: string }>;
     }
 
@@ -73,10 +88,19 @@ export async function GET(request: NextRequest) {
       temp: item.main.temp,
       feels_like: item.main.feels_like,
       humidity: item.main.humidity,
+      pressure: item.main.pressure,
       wind_speed: item.wind.speed,
       wind_deg: item.wind.deg,
+      wind_gust: item.wind.gust,
       pop: item.pop || 0,
       weather: item.weather,
+      rain_1h: item.rain?.['1h'],
+      rain_3h: item.rain?.['3h'],
+      snow_1h: item.snow?.['1h'],
+      snow_3h: item.snow?.['3h'],
+      sea_level: item.main.sea_level,
+      grnd_level: item.main.grnd_level,
+      clouds: item.clouds?.all,
     }));
 
     // Process daily data - group by day
@@ -93,12 +117,18 @@ export async function GET(request: NextRequest) {
       const temps = items.map((i: ForecastItem) => i.main.temp);
       const firstItem = items[0];
       
+      // Aggregate rain/snow data for the day
+      const totalRain = items.reduce((sum, i) => sum + (i.rain?.['3h'] || 0), 0);
+      const totalSnow = items.reduce((sum, i) => sum + (i.snow?.['3h'] || 0), 0);
+      const avgTemp = temps.reduce((a: number, b: number) => a + b) / temps.length;
+      const avgHumidity = items.reduce((sum, i) => sum + i.main.humidity, 0) / items.length;
+      
       return {
         dt: firstItem.dt,
         sunrise: currentData.sys.sunrise,
         sunset: currentData.sys.sunset,
         temp: {
-          day: temps.reduce((a: number, b: number) => a + b) / temps.length,
+          day: avgTemp,
           min: Math.min(...temps),
           max: Math.max(...temps),
           night: temps[temps.length - 1],
@@ -112,12 +142,19 @@ export async function GET(request: NextRequest) {
           morn: firstItem.main.feels_like,
         },
         pressure: firstItem.main.pressure,
-        humidity: firstItem.main.humidity,
+        humidity: avgHumidity,
         wind_speed: firstItem.wind.speed,
         wind_deg: firstItem.wind.deg,
+        wind_gust: items.reduce((max, i) => Math.max(max, i.wind.gust || 0), 0) || undefined,
         pop: Math.max(...items.map((i: ForecastItem) => i.pop || 0)),
         weather: firstItem.weather,
         uvi: 0, // UV index not available in free tier
+        rain_3h: totalRain > 0 ? totalRain : undefined,
+        snow_3h: totalSnow > 0 ? totalSnow : undefined,
+        sea_level: firstItem.main.sea_level,
+        grnd_level: firstItem.main.grnd_level,
+        moon_phase: calculateMoonPhase(firstItem.dt),
+        clouds: items.reduce((sum, i) => sum + (i.clouds?.all || 0), 0) / items.length,
       };
     });
 
@@ -142,7 +179,14 @@ export async function GET(request: NextRequest) {
         visibility: currentData.visibility,
         wind_speed: currentData.wind.speed,
         wind_deg: currentData.wind.deg,
+        wind_gust: currentData.wind.gust,
         weather: currentData.weather,
+        rain_1h: currentData.rain?.['1h'],
+        rain_3h: currentData.rain?.['3h'],
+        snow_1h: currentData.snow?.['1h'],
+        snow_3h: currentData.snow?.['3h'],
+        sea_level: currentData.main.sea_level,
+        grnd_level: currentData.main.grnd_level,
       },
       hourly: hourlyData,
       daily: dailyData,
