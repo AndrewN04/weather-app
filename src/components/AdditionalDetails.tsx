@@ -4,11 +4,9 @@ import { WeatherData } from '@/types/weather';
 import { useAppSelector } from '@/store/hooks';
 import { 
   getPrecipitation, 
-  getMoonPhaseDescription,
-  getWindSpeed 
+  getMoonPhaseDescription
 } from '@/utils/weather';
 import { 
-  Wind, 
   Gauge, 
   CloudRain, 
   CloudSnow, 
@@ -34,19 +32,6 @@ export default function AdditionalDetails({ current, moonPhase }: AdditionalDeta
       <h2 className="text-xl font-semibold text-white mb-4">Additional Details</h2>
       
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {/* Wind Gust */}
-        {current.wind_gust && (
-          <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
-            <Wind className="w-8 h-8 text-cyan-300" />
-            <div>
-              <p className="text-white/70 text-sm">Wind Gust</p>
-              <p className="text-white font-semibold">
-                {getWindSpeed(current.wind_gust, units)}
-              </p>
-            </div>
-          </div>
-        )}
-
         {/* Rain Volume */}
         {hasRain && (
           <div className="flex items-center gap-3 bg-white/5 rounded-lg p-3">
@@ -126,7 +111,7 @@ export default function AdditionalDetails({ current, moonPhase }: AdditionalDeta
       </div>
 
       {/* Show message if no additional data available */}
-      {!current.wind_gust && !hasRain && !hasSnow && !hasPressureLevels && moonPhase === undefined && (
+      {!hasRain && !hasSnow && !hasPressureLevels && moonPhase === undefined && current.clouds === undefined && (
         <p className="text-white/50 text-center py-4">
           No additional weather details available at this time
         </p>

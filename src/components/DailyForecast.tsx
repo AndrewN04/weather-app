@@ -36,6 +36,9 @@ export default function DailyForecast() {
                   src={`https://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
                   alt={day.weather[0]?.description}
                   className="w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0"
+                  width={48}
+                  height={48}
+                  loading="lazy"
                 />
               )}
               

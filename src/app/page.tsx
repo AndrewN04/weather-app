@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { fetchWeatherData, fetchAirQuality } from '@/store/slices/weatherSlice';
 import { getWeatherBackground } from '@/utils/weather';
@@ -11,14 +12,23 @@ import HourlyForecast from '@/components/HourlyForecast';
 import DailyForecast from '@/components/DailyForecast';
 import AirQuality from '@/components/AirQuality';
 import WeatherAlerts from '@/components/WeatherAlerts';
-import WeatherMap from '@/components/WeatherMap';
-import TemperatureChart from '@/components/TemperatureChart';
 import AdditionalDetails from '@/components/AdditionalDetails';
-import { Loader2 } from 'lucide-react';
+import { WeatherCardSkeleton, ForecastCardSkeleton, MapCardSkeleton } from '@/components/LoadingSkeletons';
+
+// Lazy load heavy components
+const WeatherMap = dynamic(() => import('@/components/WeatherMap'), {
+  loading: () => <MapCardSkeleton />,
+  ssr: false,
+});
+
+const TemperatureChart = dynamic(() => import('@/components/TemperatureChart'), {
+  loading: () => <ForecastCardSkeleton />,
+  ssr: false,
+});
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const { currentWeather, loading } = useAppSelector((state) => state.weather);
+  const { currentWeather } = useAppSelector((state) => state.weather);
 
   useEffect(() => {
     // Get user's location on mount
@@ -65,14 +75,21 @@ export default function Home() {
           <SearchBar />
         </div>
 
-        {loading && !currentWeather ? (
-          <div className="flex items-center justify-center min-h-[400px]">
-            <div className="text-center">
-              <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
-              <p className="text-white text-lg">Loading weather data...</p>
+        {!currentWeather ? (
+          <div className="space-y-3 sm:space-y-6">
+            <WeatherCardSkeleton />
+            <WeatherCardSkeleton />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
+              <ForecastCardSkeleton />
+              <ForecastCardSkeleton />
+            </div>
+            <ForecastCardSkeleton />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6">
+              <MapCardSkeleton />
+              <MapCardSkeleton />
             </div>
           </div>
-        ) : currentWeather ? (
+        ) : (
           <div className="space-y-3 sm:space-y-6">
             <WeatherAlerts />
             
@@ -94,12 +111,6 @@ export default function Home() {
               <AirQuality />
               <WeatherMap />
             </div>
-          </div>
-        ) : (
-          <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8 text-center">
-            <p className="text-gray-600 text-lg">
-              Search for a location or enable location services to view weather data.
-            </p>
           </div>
         )}
       </main>

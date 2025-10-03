@@ -45,6 +45,10 @@ export default function CurrentWeather() {
               src={`https://openweathermap.org/img/wn/${weatherIcon}@4x.png`}
               alt={weatherDescription}
               className="w-20 h-20 sm:w-32 sm:h-32 flex-shrink-0"
+              width={128}
+              height={128}
+              fetchPriority="high"
+              loading="eager"
             />
           )}
           <div>

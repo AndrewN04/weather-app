@@ -36,6 +36,9 @@ export default function HourlyForecast() {
                 src={`https://openweathermap.org/img/wn/${hour.weather[0].icon}.png`}
                 alt={hour.weather[0]?.description}
                 className="w-14 h-14 sm:w-16 sm:h-16"
+                width={64}
+                height={64}
+                loading="lazy"
               />
             )}
             

@@ -16,7 +16,9 @@ export default function SearchBar() {
 
   useEffect(() => {
     const searchLocations = async () => {
-      if (query.length < 2) {
+      // Allow search with 2+ characters for city names, or 5 digits for ZIP codes
+      const isZipCode = /^\d{5}$/.test(query.trim());
+      if (!isZipCode && query.length < 2) {
         setResults([]);
         return;
       }
@@ -103,8 +105,13 @@ export default function SearchBar() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => query.length >= 2 && setShowResults(true)}
-            placeholder="Search city or ZIP..."
+            onFocus={() => {
+              const isZipCode = /^\d{5}$/.test(query.trim());
+              if (isZipCode || query.length >= 2) {
+                setShowResults(true);
+              }
+            }}
+            placeholder="Search city name or ZIP code (e.g., 10001)..."
             className="w-full pl-8 sm:pl-10 pr-3 sm:pr-4 py-2 sm:py-3 text-sm sm:text-base rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900 placeholder:text-gray-500 font-medium"
           />
           {isSearching && (
