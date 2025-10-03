@@ -31,32 +31,10 @@ export default function Home() {
   const { currentWeather } = useAppSelector((state) => state.weather);
 
   useEffect(() => {
-    // Get user's location on mount
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          dispatch(fetchWeatherData({ lat: latitude, lon: longitude }));
-          dispatch(fetchAirQuality({ lat: latitude, lon: longitude }));
-        },
-        () => {
-          // Geolocation denied or failed - use default location
-          console.warn('Geolocation denied or unavailable. Using default location (New York).');
-          dispatch(fetchWeatherData({ lat: 40.7128, lon: -74.0060 }));
-          dispatch(fetchAirQuality({ lat: 40.7128, lon: -74.0060 }));
-        },
-        {
-          enableHighAccuracy: false,
-          timeout: 5000,
-          maximumAge: 0
-        }
-      );
-    } else {
-      // Default to New York if geolocation is not supported
-      console.warn('Geolocation not supported. Using default location (New York).');
-      dispatch(fetchWeatherData({ lat: 40.7128, lon: -74.0060 }));
-      dispatch(fetchAirQuality({ lat: 40.7128, lon: -74.0060 }));
-    }
+    // Load default location (New York) on mount
+    // User can manually request their location using the "Current Location" button
+    dispatch(fetchWeatherData({ lat: 40.7128, lon: -74.0060 }));
+    dispatch(fetchAirQuality({ lat: 40.7128, lon: -74.0060 }));
   }, [dispatch]);
 
   const weatherId = currentWeather?.current.weather[0]?.id || 800;
